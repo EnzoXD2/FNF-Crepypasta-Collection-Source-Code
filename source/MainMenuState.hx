@@ -106,6 +106,10 @@ class MainMenuState extends MusicBeatState
 
 		FlxG.camera.setFilters([new ShaderFilter(vcrStuff.shader)]);
 
+		#if android
+		addVirtualPad(UP_DOWN, A_B);
+		#end
+
 		super.create();
 		
 		textGrp.forEach(function(text:Alphabet)
