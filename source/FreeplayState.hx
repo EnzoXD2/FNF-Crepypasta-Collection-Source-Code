@@ -214,6 +214,10 @@ class FreeplayState extends MusicBeatState
 		vhs.animation.play('uh');
 		// add(vhs);
 
+		#if android
+		addVirtualPad(LEFT_FULL, A_B);
+		#end
+
 		super.create();
 	}
 
