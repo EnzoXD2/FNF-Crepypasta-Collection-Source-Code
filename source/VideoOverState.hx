@@ -12,7 +12,6 @@ import sys.io.File;
 
 class VideoOverState extends MusicBeatSubstate
 {
-    var video:FlxVideo;
     public static var deadReason:DeadCause = BEING_A_LOSER;
     var shouldDoFinishCallback:Bool = true;
     var lastMessage:String = '';
@@ -43,16 +42,6 @@ class VideoOverState extends MusicBeatSubstate
             case UNOWN:
                 shouldSay = 'dont press the unowns';
         }
-
-        video.finishCallback = function()
-        {
-            FlxG.sound.playMusic(Paths.music('menuTheme', 'creepy'));
-
-            var textLmao:FlxText = new FlxText(FlxG.width, FlxG.height, 0, '', 38);
-            textLmao.setFormat(Paths.font('vcr.ttf'), 32, FlxColor.RED, CENTER);
-            textLmao.scrollFactor.set();
-            textLmao.screenCenter();
-            add(textLmao);
 
             var manualSonic:FlxSprite = new FlxSprite().loadGraphic(Paths.image('Manual_Sonic', 'creepy'));
             manualSonic.scrollFactor.set();
@@ -113,7 +102,6 @@ class VideoOverState extends MusicBeatSubstate
             }
             #end
 
-            video.stopVideo(true);
             #if !desktop
             MusicBeatState.resetState();
             LoadingState.loadAndSwitchState(new PlayState(), true);
@@ -130,7 +118,6 @@ class VideoOverState extends MusicBeatSubstate
                 #end
             }
 
-            video.stopVideo(true);
             MusicBeatState.switchState(new MainMenuState());
         }
     }
