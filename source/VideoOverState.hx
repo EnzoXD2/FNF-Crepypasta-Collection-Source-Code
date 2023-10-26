@@ -42,8 +42,8 @@ class VideoOverState extends MusicBeatSubstate
             case UNOWN:
                 shouldSay = 'dont press the unowns';
         }
-    }
-    var manualSonic:FlxSprite = new FlxSprite().loadGraphic(Paths.image('Manual_Sonic', 'creepy'));
+
+            var manualSonic:FlxSprite = new FlxSprite().loadGraphic(Paths.image('Manual_Sonic', 'creepy'));
             manualSonic.scrollFactor.set();
             manualSonic.screenCenter();
             manualSonic.visible = false;
