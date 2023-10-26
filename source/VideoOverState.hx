@@ -81,8 +81,6 @@ class VideoOverState extends MusicBeatSubstate
 
     override public function update(elapsed:Float)
     {
-        super.update(elapsed);
-
         if (controls.ACCEPT)
         {
             
