@@ -24,7 +24,7 @@ class VideoOverState extends MusicBeatSubstate
         {
             lastMessage = 'you would like to enter the song again right?';
         }
-    else
+        else
         {
             lastMessage = 'you would like to play the whole week again right?'; 
         }
@@ -42,55 +42,21 @@ class VideoOverState extends MusicBeatSubstate
             case UNOWN:
                 shouldSay = 'dont press the unowns';
         }
-
-            var manualSonic:FlxSprite = new FlxSprite().loadGraphic(Paths.image('Manual_Sonic', 'creepy'));
-            manualSonic.scrollFactor.set();
-            manualSonic.screenCenter();
-            manualSonic.visible = false;
-            add(manualSonic);
-
-            if(PlayState.SONG.song.toLowerCase() == 'only-me')
-            {
-                #if desktop
-                Application.current.window.alert('YOU CAN SEE?');
-                Application.current.window.close();
-                #end
-            }
-
-            var vhs:FlxSprite = new FlxSprite();
-            vhs.frames = Paths.getSparrowAtlas('vhs_effect', 'creepy');
-            vhs.animation.addByPrefix('vhs', 'VHS');
-            vhs.animation.play('vhs');
-            vhs.setGraphicSize(Std.int(vhs.width * 3.5));
-            vhs.alpha = 0.5;
-            vhs.scrollFactor.set();
-            vhs.screenCenter();
-            add(vhs);
-
-            new FlxTimer().start(4, function(tmr:FlxTimer)
-            {
-                if(deadReason == SONIC_HAND)
-                {
-                    manualSonic.visible = true;
-                }
-            else
-                textLmao.text = shouldSay;
-            });
-        }
     }
 
     override public function update(elapsed:Float)
     {
+        super.update(elapsed);
+
         if (controls.ACCEPT)
         {
-            
             #if desktop
             if(PlayState.SONG.song.toLowerCase() == 'only-me')
             {
                 Application.current.window.alert('YOU CAN SEE?');
                 Application.current.window.close();
             }
-        else
+            else
             {
                 Application.current.window.alert('you are very optimistic', '???');
                 Application.current.window.alert('sadly', '???');
@@ -99,7 +65,6 @@ class VideoOverState extends MusicBeatSubstate
                 Application.current.window.close();
             }
             #end
-
             #if !desktop
             MusicBeatState.resetState();
             LoadingState.loadAndSwitchState(new PlayState(), true);
@@ -115,7 +80,6 @@ class VideoOverState extends MusicBeatSubstate
                 Application.current.window.close();
                 #end
             }
-
             MusicBeatState.switchState(new MainMenuState());
         }
     }
