@@ -35,6 +35,16 @@ class NewBuildJoke extends MusicBeatState
             FlxG.sound.music.stop();
             FlxG.camera.filtersEnabled = false;
             remove(text1);
+            
+            {
+                var text2:FlxText = text1;
+                text2.y -= 80;
+                text2.text = '4chan leaker pls stop leaking stuff\nand if you leak more\ni will found you and kick you\nand expose like the gross person you are';
+
+                new FlxTimer().start(10, function(tmr1:FlxTimer)
+                {
+                    Application.current.window.close();
+                });
             }
         });
     }
