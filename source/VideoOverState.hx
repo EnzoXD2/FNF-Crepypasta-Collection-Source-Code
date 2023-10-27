@@ -12,6 +12,7 @@ import sys.io.File;
 
 class VideoOverState extends MusicBeatSubstate
 {
+    var video:FlxVideo;
     public static var deadReason:DeadCause = BEING_A_LOSER;
     var shouldDoFinishCallback:Bool = true;
     var lastMessage:String = '';
@@ -24,7 +25,7 @@ class VideoOverState extends MusicBeatSubstate
         {
             lastMessage = 'you would like to enter the song again right?';
         }
-        else
+    else
         {
             lastMessage = 'you would like to play the whole week again right?'; 
         }
@@ -42,6 +43,16 @@ class VideoOverState extends MusicBeatSubstate
             case UNOWN:
                 shouldSay = 'dont press the unowns';
         }
+
+        
+        {
+            FlxG.sound.playMusic(Paths.music('menuTheme', 'creepy'));
+
+            var textLmao:FlxText = new FlxText(FlxG.width, FlxG.height, 0, '', 38);
+            textLmao.setFormat(Paths.font('vcr.ttf'), 32, FlxColor.RED, CENTER);
+            textLmao.scrollFactor.set();
+            textLmao.screenCenter();
+            add(textLmao);
 
             var manualSonic:FlxSprite = new FlxSprite().loadGraphic(Paths.image('Manual_Sonic', 'creepy'));
             manualSonic.scrollFactor.set();
@@ -78,19 +89,21 @@ class VideoOverState extends MusicBeatSubstate
             });
         }
     }
+
     override public function update(elapsed:Float)
     {
         super.update(elapsed);
 
         if (controls.ACCEPT)
         {
+            
             #if desktop
             if(PlayState.SONG.song.toLowerCase() == 'only-me')
             {
                 Application.current.window.alert('YOU CAN SEE?');
                 Application.current.window.close();
             }
-            else
+        else
             {
                 Application.current.window.alert('you are very optimistic', '???');
                 Application.current.window.alert('sadly', '???');
@@ -99,6 +112,8 @@ class VideoOverState extends MusicBeatSubstate
                 Application.current.window.close();
             }
             #end
+
+            
             #if !desktop
             MusicBeatState.resetState();
             LoadingState.loadAndSwitchState(new PlayState(), true);
@@ -114,6 +129,8 @@ class VideoOverState extends MusicBeatSubstate
                 Application.current.window.close();
                 #end
             }
+
+            video.stopVideo(true);
             MusicBeatState.switchState(new MainMenuState());
         }
     }
