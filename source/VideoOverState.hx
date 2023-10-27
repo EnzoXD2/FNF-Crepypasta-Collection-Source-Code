@@ -12,7 +12,6 @@ import sys.io.File;
 
 class VideoOverState extends MusicBeatSubstate
 {
-    var video:FlxVideo;
     public static var deadReason:DeadCause = BEING_A_LOSER;
     var shouldDoFinishCallback:Bool = true;
     var lastMessage:String = '';
@@ -130,7 +129,6 @@ class VideoOverState extends MusicBeatSubstate
                 #end
             }
 
-            video.stopVideo(true);
             MusicBeatState.switchState(new MainMenuState());
         }
     }
